@@ -35,31 +35,39 @@ public class CategoryDAO implements ICategoryDAO {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql= "Select * from category";
-		try {
-			stmt = con.prepareStatement(sql);
-			rs = stmt.executeQuery();
-			while(rs.next()) {
-				CategoryModel category = new CategoryModel();
-				category.setId(rs.getLong("id"));
-				category.setName(rs.getString("name"));
-				category.setCode(rs.getString("code"));
-				results.add(category);
-			}
-		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return null;
-		}finally {
+		if(con != null) {
 			try {
-				con.close();
-				stmt.close();
-				rs.close();
+				stmt = con.prepareStatement(sql);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+					CategoryModel category = new CategoryModel();
+					category.setId(rs.getLong("id"));
+					category.setName(rs.getString("name"));
+					category.setCode(rs.getString("code"));
+					results.add(category);
+				}
+				return results;
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				// TODO: handle exception
 				e.printStackTrace();
+				return null;
+			}finally {
+				try {
+					if(con!=null) {
+						con.close();
+					}
+					if(stmt!=null) {
+						stmt.close();
+					}
+					if(rs!=null) {
+						rs.close();
+					}
+				} catch (SQLException e2) {
+					return null;
+				}
 			}
 		}
-		return results;
+		return null;
 	}
 
 }
