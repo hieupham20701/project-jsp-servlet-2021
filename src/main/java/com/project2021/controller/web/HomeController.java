@@ -11,12 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.project2021.service.ICategoryService;
+import com.project2021.service.INewService;
 
 @WebServlet(urlPatterns = {"/trang-chu"} )
 public class HomeController extends HttpServlet {
 	
 	@Inject
 	private ICategoryService categoryService;
+	
+	@Inject
+	private INewService newService;
+	
 	private static final long serialVersionUID = 1L;
 	
     public HomeController() {
@@ -25,6 +30,8 @@ public class HomeController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Long categoryId =1L;
+		request.setAttribute("news", newService.findByCategoryId(categoryId));
 		request.setAttribute("categories",categoryService.findAll());
 		RequestDispatcher rd = request.getRequestDispatcher("/views/web/Home.jsp");
 		rd.forward(request, response);

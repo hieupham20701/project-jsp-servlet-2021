@@ -11,7 +11,7 @@ import java.util.List;
 import com.project2021.dao.ICategoryDAO;
 import com.project2021.model.CategoryModel;
 
-public class CategoryDAO implements ICategoryDAO {
+public class CategoryDAO extends AbstractDAO implements ICategoryDAO {
 	public Connection getConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
