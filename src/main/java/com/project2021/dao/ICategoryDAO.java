@@ -4,6 +4,6 @@ import java.util.List;
 
 import com.project2021.model.CategoryModel;
 
-public interface ICategoryDAO {
+public interface ICategoryDAO extends GenericDAO<CategoryModel> {
 	List<CategoryModel> findAll();
 }
