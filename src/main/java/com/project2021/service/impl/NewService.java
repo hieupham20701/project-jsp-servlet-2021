@@ -19,6 +19,13 @@ public class NewService implements INewService {
 		// TODO Auto-generated method stub
 		return newDAO.findByCategoryId(categoryId);
 	}
+	@Override
+	public NewModel save(NewModel newModel) {
+		// TODO Auto-generated method stub
+		Long newId = newDAO.save(newModel);
+		System.out.println(newId);
+		return null;
+	}
 	
 
 
