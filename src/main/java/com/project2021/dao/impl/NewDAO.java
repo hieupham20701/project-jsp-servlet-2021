@@ -25,4 +25,11 @@ public class NewDAO extends AbstractDAO<NewModel> implements INewDAO {
 		update(sql, newModel.getId());
 	}
 
+	@Override
+	public NewModel findOne(Long id) {
+		String sql = "Select * from news where id = ?";
+		List<NewModel> news = query(sql, new NewMapper(), id);
+		return news.isEmpty() ? null : news.get(0);
+	}
+
 }

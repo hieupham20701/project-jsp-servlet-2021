@@ -13,7 +13,7 @@ import java.util.List;
 import com.project2021.dao.GenericDAO;
 import com.project2021.mapper.RowMapper;
 
-public class AbstractDAO<T> implements GenericDAO<T> {
+public class  AbstractDAO<T> implements GenericDAO<T> {
 	public Connection getConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

@@ -21,13 +21,8 @@ public class NewService implements INewService {
 	}
 	@Override
 	public NewModel save(NewModel newModel) {
-		// TODO Auto-generated method stub
 		Long newId = newDAO.save(newModel);
-		System.out.println(newId);
-		return null;
+		return newDAO.findOne(newId);
 	}
 	
-
-
-
 }
