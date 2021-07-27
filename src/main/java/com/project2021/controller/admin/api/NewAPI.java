@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project2021.dao.impl.NewDAO;
 import com.project2021.model.NewModel;
 import com.project2021.service.INewService;
 import com.project2021.utils.HttpUtil;
@@ -36,11 +37,24 @@ public class NewAPI extends HttpServlet {
 	}
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		ObjectMapper mapper = new ObjectMapper();
+		req.setCharacterEncoding("UTF-8");
+		resp.setContentType("application/json");
+		NewModel updateNew = HttpUtil.of(req.getReader()).toModel(NewModel.class);
+		updateNew = newService.update(updateNew);
+		mapper.writeValue(resp.getOutputStream(), updateNew);
 	}
 	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		req.setCharacterEncoding("UTF-8");
+		resp.setContentType("application/json");
+		NewModel newModel = HttpUtil.of(req.getReader()).toModel(NewModel.class );
+		newService.delete(newModel.getIds());
+		mapper.writeValue(resp.getOutputStream(), "{}");
 
+		
 	}
+
 }
