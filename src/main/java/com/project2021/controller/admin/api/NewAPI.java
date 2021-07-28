@@ -54,7 +54,6 @@ public class NewAPI extends HttpServlet {
 		newService.delete(newModel.getIds());
 		mapper.writeValue(resp.getOutputStream(), "{}");
 
-		
 	}
 
 }
