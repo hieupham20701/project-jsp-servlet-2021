@@ -1,5 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file= "/common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,31 +28,20 @@
 								 <table class="table table-bordered">
 								    <thead>
 								      <tr>
-								        <th>Firstname</th>
-								        <th>Lastname</th>
-								        <th>Email</th>
+								        <th>Tên bài viết</th>
+								        <th>Mô tả ngắn</th>
 								      </tr>
 								    </thead>
 								    <tbody>
-								      <tr>
-								        <td>John</td>
-								        <td>Doe</td>
-								        <td>john@example.com</td>
-								      </tr>
-								      <tr>
-								        <td>Mary</td>
-								        <td>Moe</td>
-								        <td>mary@example.com</td>
-								      </tr>
-								      <tr>
-								        <td>July</td>
-								        <td>Dooley</td>
-								        <td>july@example.com</td>
-								      </tr>
+								    	<c:forEach var="a" items="${model.listResult}">
+									      <tr>
+									        <td>${a.title}</td>
+									        <td>${a.shortDescription}</td>
+									      </tr>
+										</c:forEach>
 								    </tbody>
 								  </table>
-								  <ul class="pagination" id="pagination"></ul>
-
+<!-- 	 <ul class="pagination" id="pagination"></ul>-->
 							</div>
 						</div>
 					</div>
@@ -59,11 +50,12 @@
         </div>
     </div>
 </div><!-- /.main-content -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(function () {
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: 10,
             visiblePages: 5,
+			startPage: 1,
             onPageClick: function (event, page) {
                 console.info(page + ' (from options)');
             }
@@ -71,6 +63,6 @@
             console.info(page + ' (from event listening)');
         });
     });
-</script>
+</script> -->
 </body>
 </html>

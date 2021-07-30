@@ -1,6 +1,6 @@
 package com.project2021.dao;
 
-import java.util.List;
+import java.util.List;import javax.enterprise.inject.New;
 
 import com.project2021.model.NewModel;
 
@@ -10,4 +10,5 @@ public interface INewDAO extends GenericDAO<NewModel>{
 	Long save(NewModel newModel);
 	void update(NewModel updateNew);
 	void delete(long id);
+	List<NewModel> findAll();
 }

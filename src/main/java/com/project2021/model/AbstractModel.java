@@ -12,6 +12,8 @@ public class AbstractModel<T> {
 	private String createdBy;
 	private String modifiedBy;
 	private long[] ids;
+	private List<T> listResult = new ArrayList<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -48,5 +50,11 @@ public class AbstractModel<T> {
 	public void setIds(long[] ids) {
 		this.ids = ids;
 	}
-
+	public List<T> getListResult() {
+		return listResult;
+	}
+	public void setListResult(List<T> listResult) {
+		this.listResult = listResult;
+	}
+	
 }
