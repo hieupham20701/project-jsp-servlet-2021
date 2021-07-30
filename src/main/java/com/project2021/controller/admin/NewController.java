@@ -28,7 +28,22 @@ public class NewController extends HttpServlet {
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NewModel model = new NewModel();
-		model.setListResult(newService.findAll());
+		String pageStr = request.getParameter("page");
+		String maxPageItemStr = request.getParameter("maxPageItem");
+		if(pageStr != null) {
+			model.setPage(Integer.parseInt(pageStr));
+		}else {
+			model.setPage(1);
+		}
+		if(maxPageItemStr != null){
+			model.setMaxPageItem(Integer.parseInt(maxPageItemStr));
+		}else {
+			
+		}
+		Integer offset = (model.getPage() - 1) * model.getMaxPageItem();
+		model.setListResult(newService.findAll(offset, model.getMaxPageItem()));
+		model.setTotalItem(newService.getTotalItem());
+		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getMaxPageItem()));
 		request.setAttribute(SystemConstant.MODEL, model);
 		RequestDispatcher rd = request.getRequestDispatcher("views/admin/new/list.jsp");
 		rd.forward(request, response);

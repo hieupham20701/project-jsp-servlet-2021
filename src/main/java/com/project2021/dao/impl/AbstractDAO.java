@@ -80,9 +80,7 @@ public class  AbstractDAO<T> implements GenericDAO<T> {
 					stmt.setInt(index, (Integer) parameter);
 				}else if (parameter instanceof Timestamp) {
 					stmt.setTimestamp(index,(Timestamp) parameter);
-				}else if(parameter == null) {
-					stmt.setNull(index, Types.NULL); }
-					
+				}	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -173,6 +171,41 @@ public class  AbstractDAO<T> implements GenericDAO<T> {
 		}
 		return null;
 
+	}
+
+	@Override
+	public int count(String sql, Object... parameters) {	
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			int count =0;
+			con = getConnection();
+			stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			setParameter(stmt, parameters);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				count = rs.getInt(1);
+			}
+			return count;
+		} catch (SQLException e) {
+			return 0;
+			
+		}finally {
+			try {
+				if(con!=null) {
+					con.close();
+				}
+				if(stmt!=null) {
+					stmt.close();
+				}
+				if(rs!=null) {
+					rs.close();
+				}
+			} catch (SQLException e2) {
+				return 0;
+			}
+		}
 	}
 
 

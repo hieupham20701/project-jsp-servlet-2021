@@ -51,10 +51,16 @@ public class NewDAO extends AbstractDAO<NewModel> implements INewDAO {
 	}
 
 	@Override
-	public List<NewModel> findAll() {
-		String sql = "Select * from news";
-		return query(sql, new NewMapper());
+	public List<NewModel> findAll(Integer offset, Integer limit) {
+		String sql = "Select * from news Limit ?,?";
+		return query(sql, new NewMapper(), offset, limit);
 		
+	}
+
+	@Override
+	public int getTotalItem() {
+		String sql = "Select count(*) from news";
+		return count(sql);
 	}
 
 }
